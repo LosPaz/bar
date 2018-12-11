@@ -32,7 +32,7 @@ class Workshift extends Model {
     public static function getLastEstimatedAmount(){
         return Workshift::latest()
             ->where('type', 1)
-            ->select('estimate_amount')
+            ->select('estimate_amount', 'created_at')
             ->first();
     }
 }

@@ -99,6 +99,7 @@
                                         0
                                     @endif
                                 </h3>
+                                <h4>Chiusura il {{ $estimatedAmount->created_at->format('d/m/Y H:i') }}</h4>
                             </div>
                         </div>
                         <div class="row">
