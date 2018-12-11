@@ -1,0 +1,11 @@
+{
+	"name": "Bar",
+	"alias": "Bar",
+	"description": "Modulo gestione Bar",
+	"authors": {
+		"name": "",
+		"email": ""
+	},
+	"type": "dev",
+	"version": "0.0.0"
+}
