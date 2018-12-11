@@ -16,7 +16,7 @@
                             <select name="item_id" class="form-control" required>
                                 <option></option>
                                 @foreach($items as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}">{{ $item->name }} ({{ $item->format }})</option>
                                 @endforeach
                             </select>
                         </div>

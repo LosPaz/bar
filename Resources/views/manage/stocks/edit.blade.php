@@ -18,7 +18,7 @@
                                 <option></option>
                                 @foreach($items as $item)
                                     <option value="{{ $item->id }}" @if($item->id == $stock->item_id) selected @endif>
-                                        {{ $item->name }}
+                                        {{ $item->name }} ({{ $item->format }})
                                     </option>
                                 @endforeach
                             </select>
