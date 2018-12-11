@@ -5,6 +5,27 @@
         <h1 class="page-title">
             Prodotti
         </h1>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="form-group">
+            <label class="form-label">Categorie</label>
+            <div class="selectgroup selectgroup-pills">
+                <label class="selectgroup-item">
+                    <input type="radio" name="cat" value=""
+                           @if(!request()->has('cat') OR request()->cat == '') checked @endif
+                           class="selectgroup-input">
+                    <span class="selectgroup-button">Tutte</span>
+                </label>
+                @foreach($categories as $category)
+                    <label class="selectgroup-item">
+                        <input type="radio" name="cat" value="{{ $category->id }}"
+                               @if(request()->cat == $category->id) checked @endif
+                               class="selectgroup-input">
+                        <span class="selectgroup-button">{{ $category->name }}</span>
+                    </label>
+                @endforeach
+            </div>
+        </div>
+
     </div>
     <div class="row">
         <div class="col-md-8">
@@ -13,7 +34,10 @@
                     <div class="col" style="max-width: 300px;">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title"><a href="javascript:void(0)">{{ $product->item->name }}</a></h4>
+                                <h4 class="card-title"><a href="javascript:void(0)">
+                                        {{ $product->item->name }}
+                                        ({{ $product->item->format }})
+                                    </a></h4>
                                 <div class="card-subtitle">
                                     Disponibilità
                                     <br />
@@ -417,6 +441,12 @@
                         }
                     })
             });
+            $('input[type=radio][name=cat]').change(function() {
+                var url = new URL(window.location.href);
+                url.searchParams.set('cat', this.value);
+                window.location.href = url;
+            });
         });
+
     </script>
 @endpush
