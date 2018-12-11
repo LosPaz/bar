@@ -22,7 +22,7 @@ class ProductController extends Controller {
         });
         $products->join('items', 'stocks.item_id', '=', 'items.id');
         $products->orderBy('name');
-
+        $products->select('stocks.*');
         return view('Bar::products.index', [
             'products' => $products->get(),
             'estimatedAmount' => Workshift::getLastEstimatedAmount(),
