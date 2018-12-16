@@ -17,7 +17,7 @@
                                 <option></option>
                                 @foreach($repositories as $repository)
                                     <option value="{{ $repository->id }}"
-                                            @if(Michelangelo\Confy\Models\Confy::getConfig('default_repo', 'settings')) selected @endif
+                                            @if(Michelangelo\Confy\Models\Confy::getConfig('default_repo', 'settings') == $repository->id) selected @endif
                                     >
                                         {{ $repository->name }}
                                     </option>
