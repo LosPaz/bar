@@ -4,15 +4,17 @@ namespace Modules\Bar\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Modules\Bar\Models\StockTransaction;
 use Modules\Bar\Models\Workshift;
 
 class WorkshiftController extends Controller {
 
     /**
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function open(){
+    public function open(Request $request){
         if(Workshift::mustBeClosed()){
             return response()->json([
                 'success' => false,
@@ -22,6 +24,7 @@ class WorkshiftController extends Controller {
 
         $w = new Workshift;
         $w->type = 0;
+        $w->real_amount = $request->amount;
         $w->save();
         return response()->json([
             'success' => true
@@ -29,9 +32,10 @@ class WorkshiftController extends Controller {
     }
 
     /**
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function close(){
+    public function close(Request $request){
         if(Workshift::mustBeOpened()){
             return response()->json([
                 'success' => false,
@@ -46,6 +50,7 @@ class WorkshiftController extends Controller {
 
         $w = new Workshift;
         $w->type = 1;
+        $w->real_amount = $request->amount;
         $w->estimate_amount = (StockTransaction::amountBetweenTwoDate($start, $end))[0]['total'];
         $w->save();
 

@@ -395,34 +395,26 @@
             $('.workshiftChange').on('click', function () {
                 let status = $(this).data('status');
                 cart.emptyCart();
-                swal("Confermare lo stato del turno in " + ((status === 'open') ? 'aperto' : 'chiuso') + '?', {
-                    buttons: {
-                        canc: {
-                            text: "Annulla",
-                            value: "cancel",
-                        },
-                        catch: {
-                            text: "Conferma!",
-                            value: "confirm",
-                            closeModal: false,
-                        }
-                    },
+                swal({
+                    text: "Per confermare lo stato del turno in " + ((status === 'open') ? 'aperto' : 'chiuso') + ' inserisci l\'importo presente in cassa.',
+                    content: 'input',
+                    button: {
+                        text: "Conferma!",
+                        closeModal: false,
+                    }
                 })
                     .then((value) => {
-                        switch (value) {
-                            case "cancel":
-                                swal("Modifica annullata!");
-                                swal.close();
-                                break;
-                            case "confirm":
-                                return fetch('/workshifts/' + status, {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                        'X-CSRF-Token': $('meta[name="_token"]').attr('content')
-                                    }
-                                });
-                        }
+                        if(value == null)
+                            throw null;
+
+                        return fetch('/workshifts/' + status, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-Token': $('meta[name="_token"]').attr('content')
+                            },
+                            body: JSON.stringify({amount: value})
+                        });
                     })
                     .then(results => {
                         return results.json();
@@ -435,7 +427,7 @@
                         }
                     })
                     .catch(error => {
-                        if(!error){
+                        if(error){
                             swal("Ops!", "Si è verificato un errore durante l'invio della richiesta.", "error");
                             swal.stopLoading();
                             swal.close();

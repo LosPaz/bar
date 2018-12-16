@@ -10,7 +10,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Turni</h3>
+                    <h3 class="card-title">Cronologia dei turni</h3>
                 </div>
                 <div class="table-responsive">
                     <table class="table card-table table-striped table-vcenter">
@@ -19,6 +19,7 @@
                             <th colspan="2">Utente</th>
                             <th>Tipo</th>
                             <th>Totale stimato in cassa</th>
+                            <th>Presente in cassa</th>
                             <th>Data</th>
                         </tr>
                         </thead>
@@ -37,6 +38,11 @@
                                 <td>
                                     @if($workshift->estimate_amount != null)
                                         &euro;{{ $workshift->estimate_amount }}
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($workshift->real_amount != null)
+                                        &euro;{{ $workshift->real_amount }}
                                     @endif
                                 </td>
                                 <td>{{ $workshift->created_at->diffForHumans() }}</td>
