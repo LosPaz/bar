@@ -23,7 +23,7 @@ Route::group(['domain' => 'bar.' . config('app.normalurl')], function () {
         /*
          * Products
          */
-        Route::get('/home', 'ProductController@index')->name('bar.home');
+        Route::get('/products', 'ProductController@index')->name('bar.home');
         Route::post('/transactions/bar', 'TransactionController@bar')->name('transactions.create');
 
         /*
