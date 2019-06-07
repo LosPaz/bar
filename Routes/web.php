@@ -58,5 +58,7 @@ Route::group(['domain' => 'bar.' . config('app.normalurl')], function () {
         Route::post('/workshifts/close', 'WorkshiftController@close')->name('workshifts.close');
         Route::get('/workshifts', 'WorkshiftController@index')->name('manager.workshifts.index');
 
+        Route::get('/workshifts/{id}/edit', 'WorkshiftController@edit')->name('manager.workshifts.edit');
+        Route::put('/workshifts/{id}', 'WorkshiftController@update')->name('manager.workshifts.update');
     });
 });

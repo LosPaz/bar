@@ -51,9 +51,7 @@
                             @auth
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item logoutCheck" href="{{ route('logout') }}">
                                         <i class="dropdown-icon fe fe-log-out"></i> Esci
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -101,7 +99,23 @@
 <script src="{{ asset('assets/js/vendors/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/vendors/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('assets/js/vendors/selectize.min.js') }}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+<script>
+    let open = {{ (bool) \Modules\Bar\Models\Workshift::mustBeClosed() }};
+
+    $(document).ready(function () {
+        $(".logoutCheck").on('click', function(event){
+            event.preventDefault();
+            if(open){
+                swal("Non puoi eseguire il logout se il turno è aperto!");
+                return false;
+            }
+            document.getElementById('logout-form').submit();
+            return true;
+        })
+    });
+</script>
 @stack('scripts')
 </body>
 </html>

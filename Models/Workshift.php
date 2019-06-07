@@ -3,6 +3,7 @@
 namespace Modules\Bar\Models;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,4 +36,10 @@ class Workshift extends Model {
             ->select('estimate_amount', 'created_at')
             ->first();
     }
+
+    public function canBeModified(){
+        $elapsedTime = Carbon::now()->diffInMinutes($this->created_at);
+        return ($elapsedTime <= 15) && $this->user->id === Auth::id();
+    }
+
 }

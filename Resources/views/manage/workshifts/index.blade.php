@@ -20,7 +20,7 @@
                             <th>Tipo</th>
                             <th>Totale stimato in cassa</th>
                             <th>Presente in cassa</th>
-                            <th>Data</th>
+                            <th colspan="2">Data</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -46,6 +46,11 @@
                                     @endif
                                 </td>
                                 <td>{{ $workshift->created_at->diffForHumans() }}</td>
+                                <td>
+                                    @if($workshift->canBeModified())
+                                        <a href="{{ route('manager.workshifts.edit', $workshift->id) }}" class="icon"><i class="fe fe-edit"></i></a>
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

@@ -66,4 +66,26 @@ class WorkshiftController extends Controller {
             'workshifts' => $w->paginate(10)
         ]);
     }
+
+    public function edit($id){
+        $workshift = Workshift::findOrFail($id);
+        if(!$workshift->canBeModified())
+            abort(403);
+
+        return view('Bar::manage.workshifts.edit', [
+            'workshift' => $workshift
+        ]);
+    }
+
+    public function update(Request $request, $id){
+        $workshift = Workshift::findOrFail($id);
+        if(!$workshift->canBeModified())
+            abort(403);
+
+        $workshift->real_amount = (float) $request->real_amount;
+        $workshift->save();
+
+        flash()->success('Turno modificato con successo.');
+        return redirect()->route('manager.workshifts.index');
+    }
 }
