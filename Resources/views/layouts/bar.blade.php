@@ -51,7 +51,7 @@
                             @auth
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item logoutCheck" href="{{ route('logout') }}">
+                                    <a class="dropdown-item logoutCheck" href="#">
                                         <i class="dropdown-icon fe fe-log-out"></i> Esci
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -102,7 +102,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
-    let open = {{ (bool) \Modules\Bar\Models\Workshift::mustBeClosed() }};
+    let open = @if((bool) \Modules\Bar\Models\Workshift::mustBeClosed() === true) 1 @else 0 @endif;
 
     $(document).ready(function () {
         $(".logoutCheck").on('click', function(event){
@@ -112,7 +112,7 @@
                 return false;
             }
             document.getElementById('logout-form').submit();
-            return true;
+            return false;
         })
     });
 </script>
