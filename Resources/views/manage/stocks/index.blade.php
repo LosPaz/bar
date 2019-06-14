@@ -30,6 +30,7 @@
                 <thead>
                 <tr>
                     <th>Prodotto</th>
+                    <th>Formato</th>
                     <th>Fornitore</th>
                     <th>Costo</th>
                     <th>Prezzo di vendita</th>
@@ -42,6 +43,7 @@
                     <tr>
 
                         <td>{{ $stock->item->name }}</td>
+                        <td>{{ $stock->item->format }}</td>
                         <td>
                             {{ $stock->supplier->name }}
                         </td>

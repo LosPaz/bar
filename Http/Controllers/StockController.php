@@ -46,6 +46,12 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
+        if(Stock::where('item_id', $request->item_id)
+                ->where('supplier_id', $request->supplier_id)
+                ->count() >= 1 ){
+            flash()->warning('Esiste già una giacenza per il prodotto e/o fornitore selezionato.');
+            return redirect()->route('manager.stocks.index');
+        }
         $stock = new Stock;
         $stock->fill($request->except('_token'));
         $stock->save();
