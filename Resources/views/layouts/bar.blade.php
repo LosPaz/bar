@@ -73,6 +73,12 @@
                     <div class="col-lg order-lg-first">
                         <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                             <li class="nav-item">
+                                <a href="#" class="nav-link" id="sidebarOpen">
+                                    <i class="fe fe-git-merge"></i> Tutti i servizi
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
                                 <a href="{{ route('bar.home') }}" class="nav-link @if(Route::is('bar.home')) active @endif">
                                     <i class="fe fe-list"></i> Prodotti
                                 </a>
@@ -117,5 +123,7 @@
     });
 </script>
 @stack('scripts')
+@include('layouts.navigation')
+
 </body>
 </html>
