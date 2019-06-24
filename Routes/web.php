@@ -62,5 +62,11 @@ Route::group(['domain' => 'bar.' . config('app.normalurl')], function () {
 
         Route::get('/workshifts/{id}/edit', 'WorkshiftController@edit')->name('manager.workshifts.edit');
         Route::put('/workshifts/{id}', 'WorkshiftController@update')->name('manager.workshifts.update');
+
+        /*
+         * History
+         */
+        Route::get('/history', 'HistoryController@index')->name('manager.history.index');
+
     });
 });

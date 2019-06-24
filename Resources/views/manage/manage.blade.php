@@ -12,6 +12,11 @@
                         <span class="icon mr-3"><i class="fe fe-settings"></i></span>Impostazioni
                     </a>
 
+                    <a href="{{ route('manager.history.index') }}"
+                       class="list-group-item list-group-item-action @if(Route::is('manager.history.*')) active @endif">
+                        <span class="icon mr-3"><i class="fe fe-clock"></i></span>Cronologia
+                    </a>
+
                     <a href="{{ route('manager.workshifts.index') }}"
                        class="list-group-item list-group-item-action @if(Route::is('manager.workshifts.*')) active @endif">
                         <span class="icon mr-3"><i class="fe fe-users"></i></span>Turni
