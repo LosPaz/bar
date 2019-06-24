@@ -8,6 +8,8 @@
 
 Route::group(['domain' => 'bar.' . config('app.normalurl')], function () {
 
+    Route::get('/', 'LoginController@home');
+
     Route::group(['prefix' => 'auth'], function (){
         Route::get('/login', 'LoginController@index')->name('bar.login');
         Route::post('/login', 'LoginController@login');

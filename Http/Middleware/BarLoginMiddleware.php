@@ -17,7 +17,8 @@ class BarLoginMiddleware
     public function handle($request, Closure $next) {
         if(Auth::check() && Auth::user()->hasRole('bar')){
             return $next($request);
+        } else {
+            return redirect()->route('bar.login');
         }
-        abort(403);
     }
 }

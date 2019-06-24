@@ -12,6 +12,13 @@ class LoginController extends Controller {
 
     protected $redirectTo = '/';
 
+    public function home(){
+        if(Auth::check())
+            return redirect()->route('bar.home');
+        else
+            return redirect()->route('bar.login');
+    }
+
     public function index(){
         if(Auth::check())
             return redirect()->route('bar.home');
